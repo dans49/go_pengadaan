@@ -25,9 +25,9 @@ func UpdateSupplier(c *fiber.Ctx) error {
 	}
 
 	type UpdateRequest struct {
-		Nama       string `json:"nama"`
+		Nama       	string `json:"nama"`
 		Email       string `json:"email"`
-		Alamat string `json:"alamat"`
+		Alamat 		string `json:"alamat"`
 	}
 
 	var req UpdateRequest
@@ -47,13 +47,13 @@ func UpdateSupplier(c *fiber.Ctx) error {
 func DeleteSupplier(c *fiber.Ctx) error {
 	id := c.Params("id")
 
-	if err := config.DB.Delete(&models.User{}, id).Error; err != nil {
+	if err := config.DB.Delete(&models.Supplier{}, id).Error; err != nil {
 		return c.Status(500).JSON(fiber.Map{
 			"message": "Failed to delete user",
 		})
 	}
 
 	return c.JSON(fiber.Map{
-		"message": "User deleted",
+		"message": "Supplier deleted",
 	})
 }
