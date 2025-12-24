@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2025 at 09:29 PM
+-- Generation Time: Dec 24, 2025 at 04:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -29,24 +29,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
-  `nama_item` varchar(50) DEFAULT NULL,
-  `stok` int(11) DEFAULT NULL,
-  `harga` bigint(20) DEFAULT NULL,
+  `name_item` varchar(50) DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
+  `price` bigint(20) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `items`
---
-
-INSERT INTO `items` (`id`, `nama_item`, `stok`, `harga`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Buku', 55, 124555, '2025-12-25 02:36:42', '2025-12-25 02:36:42', '2025-12-25 02:57:19'),
-(2, 'Buku GO', 45, 250000, '2025-12-25 02:37:34', '2025-12-25 02:37:34', NULL),
-(3, 'Buku Program Go Language', 10, 150000, '2025-12-25 02:57:46', '2025-12-25 02:57:46', NULL),
-(4, '', 0, 0, '2025-12-25 03:07:22', '2025-12-25 03:07:22', '2025-12-25 03:09:04'),
-(5, '', 0, 0, '2025-12-25 03:08:09', '2025-12-25 03:08:09', '2025-12-25 03:09:07');
 
 -- --------------------------------------------------------
 
@@ -90,22 +79,13 @@ CREATE TABLE `purchasings` (
 
 CREATE TABLE `suppliers` (
   `id` int(11) NOT NULL,
-  `nama` varchar(75) DEFAULT NULL,
+  `name` varchar(75) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `alamat` text DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `suppliers`
---
-
-INSERT INTO `suppliers` (`id`, `nama`, `email`, `alamat`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Wildan', 'wildan@mail.com', 'Tasikmalaya', '0000-00-00 00:00:00', '2025-12-24 22:55:54', NULL),
-(2, 'PT Otentik', 'otentik@mail.com', 'Tasik', '2025-12-25 03:09:23', '2025-12-25 03:09:23', '2025-12-25 03:09:29'),
-(3, 'PT Otentik', 'otentik@mail.com', 'Tasik', '2025-12-25 03:09:43', '2025-12-25 03:09:43', NULL);
 
 -- --------------------------------------------------------
 
@@ -131,8 +111,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `kata_sandi`, `nama_lengkap`, `role`, `statusdata`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'wil123', '$2a$10$ZmHN8hvgWadfxNdY1eesB.Q0qHajX7HXnW0Y35RH4/KdDq3rct98m', 'Wildan N', 'USER', 'AKTIF', '2025-12-22 17:16:11', '2025-12-23 00:10:14', NULL),
-(4, 'wil1', '$2a$10$OhDszHjZFzQsDjbNKcIEhOT4NO/mxw5CgCGiOGk1PGIfVt54FuTjm', 'Wildan N', 'ADMIN', 'AKTIF', '2025-12-22 17:23:08', '2025-12-22 17:23:08', NULL),
-(5, 'wil2', '$2a$10$XNXunlD5tMEpuUm7yeW4Q.ekun/byjgXTfTyQEWTDBQvG0xoexUm.', 'Wildan N', 'USER', 'AKTIF', '2025-12-25 01:50:03', '2025-12-25 01:50:03', NULL);
+(4, 'wil1', '$2a$10$OhDszHjZFzQsDjbNKcIEhOT4NO/mxw5CgCGiOGk1PGIfVt54FuTjm', 'Wildan N', 'ADMIN', 'AKTIF', '2025-12-22 17:23:08', '2025-12-22 17:23:08', NULL);
 
 --
 -- Indexes for dumped tables
@@ -176,7 +155,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `purchasingdetails`
@@ -194,13 +173,13 @@ ALTER TABLE `purchasings`
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
