@@ -2,14 +2,20 @@
 
 <script>
 const token = localStorage.getItem("token");
+const role = localStorage.getItem("role");
 if (!token) {
     window.location.href = "../login.html";
 }
+
+document.querySelectorAll(".admin-only").forEach(el => {
+    el.style.display = role === "ADMIN" ? "block" : "none"
+})
+
+document.querySelectorAll(".user-only").forEach(el => {
+    el.style.display = role === "USER" ? "block" : "none"
+})
 
 function logout() {
     localStorage.removeItem("token");
     window.location.href = "../login.html";
 }
-
-$("#header").load("../_partials/header.html");
-$("#sisibar").load("../_partials/sidebar.html");

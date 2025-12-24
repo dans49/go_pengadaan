@@ -107,6 +107,7 @@
 			        success: function (res) {
 			        	console.log(res)
 			            localStorage.setItem("token", res.token);
+			            localStorage.setItem("role", res.role);
 			            window.location.href = "/admin/home";
 			        },
 			        error: function (xhr) {
