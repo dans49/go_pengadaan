@@ -45,16 +45,22 @@ func SetupRoutes(app *fiber.App) {
 		},
 	)
 
-	app.Get("/admin/home",func(c *fiber.Ctx) error {
-			return c.SendFile("./public/modul/dashboard.html")
-	})
 
+	app.Get("/admin/home",func(c *fiber.Ctx) error {
+		return c.SendFile("./public/modul/dashboard.html")
+	})
 	app.Get("/admin/users",func(c *fiber.Ctx) error {
 		return c.SendFile("./public/modul/users/index.html")
 	});
+	app.Get("/admin/suppliers",func(c *fiber.Ctx) error {
+		return c.SendFile("./public/modul/suppliers/index.html")
+	});
+	app.Get("/admin/items",func(c *fiber.Ctx) error {
+		return c.SendFile("./public/modul/items/index.html")
+	});
+
 
 	admin := api.Group("/admin", middleware.JWTProtected, middleware.AdminOnly)
-
 	admin.Get("/users", controllers.GetUsers)
 	admin.Put("/users/:id", controllers.UpdateUser)
 	admin.Delete("/users/:id", controllers.DeleteUser)

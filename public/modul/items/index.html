@@ -25,7 +25,7 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Data Users</h1>
+          <h1 class="h2">Data Items</h1>
         </div>
         <a href="#" class="btn btn-primary">Tambah Data</a>
         <div class="table-responsive small mt-3">
@@ -33,10 +33,9 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Username</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Role</th>
-                <th scope="col">Status</th>
+                <th scope="col">Nama Item</th>
+                <th scope="col">Stok</th>
+                <th scope="col">Harga</th>
                 <th scope="col">Tools</th>
               </tr>
             </thead>
@@ -84,7 +83,7 @@
 
       function loadUsers() {
         $.ajax({
-            url: "http://localhost:3000/api/admin/users",
+            url: "http://localhost:3000/api/admin/items",
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
@@ -97,13 +96,12 @@
                     html += `
                         <tr>
                             <td>${u.ID}</td>
-                            <td>${u.username}</td>
-                            <td>${u.nama_lengkap}</td>
-                            <td>${u.role}</td>
-                            <td>${u.statusdata}</td>
+                            <td>${u.nama_item}</td>
+                            <td>${u.stok}</td>
+                            <td>${u.harga}</td>
                             <td>
-                              <a href="/admin/editusers/${u.ID}">Edit</a> 
-                              <a href="/delete/users/${u.ID}" class="btnhapus" onclick='return confirm(\"Apa anda yakin akan menghapus data ini?\")'>Hapus</a></td>
+                              <a href="/admin/edititems/${u.ID}">Edit</a> 
+                              <a href="/api/admin/items/${u.ID}" class="btnhapus" onclick='return confirm(\"Apa anda yakin akan menghapus data ini?\")'>Hapus</a></td>
                         </tr>
                     `;
                 });
