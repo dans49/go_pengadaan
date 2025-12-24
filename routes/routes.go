@@ -37,15 +37,21 @@ func SetupRoutes(app *fiber.App) {
 		})
 	})
 	app.Get(
-		"/admin/dashboard",
-		middleware.JWTProtected,
-		middleware.AdminOnly,
+		"/admin/dashboard",middleware.JWTProtected,middleware.AdminOnly,
 		func(c *fiber.Ctx) error {
 			return c.JSON(fiber.Map{
 				"message": "Welcome Admin",
 			})
 		},
 	)
+
+	app.Get("/admin/home",func(c *fiber.Ctx) error {
+			return c.SendFile("./public/modul/dashboard.html")
+	})
+
+	app.Get("/admin/users",func(c *fiber.Ctx) error {
+		return c.SendFile("./public/modul/users/index.html")
+	});
 
 	admin := api.Group("/admin", middleware.JWTProtected, middleware.AdminOnly)
 
@@ -56,6 +62,10 @@ func SetupRoutes(app *fiber.App) {
 	admin.Get("/suppliers", controllers.GetSuppliers)
 	admin.Put("/suppliers/:id", controllers.UpdateSupplier)
 	admin.Delete("/suppliers/:id", controllers.DeleteSupplier)
+
+	// purchase := api.Group("/purchase", middleware.JWTProtected, middleware.UserOnly)
+
+	// purchase.Post("/", controllers.CreatePurchase)
 
 
 }
