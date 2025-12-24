@@ -36,7 +36,7 @@
             <th scope="col">Nama Item</th>
             <th scope="col">Stok</th>
             <th scope="col">Harga</th>
-            <th scope="col">Tools</th>
+            <th scope="col-sm-1">Tools</th>
           </tr>
         </thead>
         <tbody id="content">
@@ -100,8 +100,9 @@
                         <td>${u.stok}</td>
                         <td>${u.harga}</td>
                         <td>
-                          <a href="/admin/edititems/${u.ID}">Edit</a> 
-                          <a href="/api/admin/items/${u.ID}" class="btnhapus" data-id="${u.ID}" onclick='return confirm(\"Apa anda yakin akan menghapus data ini?\")'>Hapus</a></td>
+                          <a href="/admin/edititems/${u.ID}" class="btn btn-warning">Edit</a> 
+                          <a href="#" class="btn btn-danger btnhapus" data-id="${u.ID}">Hapus</a>
+                        </td>
                     </tr>
                 `;
             });
@@ -115,24 +116,27 @@ $(document).ready(function () {
     loadUsers();
 });
 
-$(".btnhapus").on('click',function(){
-  const id = $(this).data("id")
-  console.log(id)
-  // $.ajax({
-  //     url: "/api/admin/items/"+id,
-  //     method: "DELETE",
-  //     headers: {
-  //         "Authorization": "Bearer " + localStorage.getItem("token")
-  //     },
-  //     success: function (res) {
-  //         alert("Data berhasil dihapus")
-  //         location.reload()
-  //     },
-  //     error: function (xhr) {
-  //         alert(xhr.responseJSON?.message || "Gagal menghapus")
-  //     }
-  // })
+$(document).on("click",".btnhapus",function(){
+  var id = $(this).data("id")
+  
+  if (!confirm("Yakin mau hapus data ini?")) return
+
+  $.ajax({
+      url: "/api/admin/items/"+id,
+      method: "DELETE",
+      headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+      },
+      success: function (res) {
+          alert("Data berhasil dihapus")
+          location.reload()
+      },
+      error: function (xhr) {
+          alert(xhr.responseJSON?.message || "Gagal menghapus")
+      }
+  })
 })
+
 
 $("#header").load("../_partials/header.html");
 $("#sisibar").load("../_partials/sidebar.html");
