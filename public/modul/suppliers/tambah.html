@@ -1,0 +1,121 @@
+<!-- HEADER -->
+<div id="header"></div>
+<div class="container-fluid">
+  <div class="row">
+    <div
+      class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary"
+    >
+      <div
+        class="offcanvas-md offcanvas-end bg-body-tertiary"
+        tabindex="-1"
+        id="sidebarMenu"
+        aria-labelledby="sidebarMenuLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="sidebarMenuLabel">
+            PT Otentik Ciptakarya
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+          <div id="sisibar"></div> 
+        </div>
+      </div>
+    </div>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Data Supplier</h1>
+      </div>
+      
+      <div class="mb-3">
+        <label class="form-label">Nama Supplier</label>
+        <input type="text" name="nama_supp" id="nama_supp" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="text" name="mail" id="mail" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Alamat</label>
+        <textarea class="form-control" name="alamat" id="alamat"></textarea>
+      </div>
+      
+      <button type="button" class="btn btn-primary" id="btnSimpan">Simpan</button>
+      <a href="/admin/suppliers" class="btn btn-dark">Kembali</a>
+      
+
+      <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+          <div class="col-md-4 d-flex align-items-center">
+            <a
+              href="/"
+              class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1"
+              aria-label="Bootstrap"
+            >
+              <svg class="bi" width="30" height="24" aria-hidden="true">
+                <use xlink:href="#bootstrap"></use>
+              </svg>
+            </a>
+            <span class="mb-3 mb-md-0 text-body-secondary"
+              >&copy; 2025 Company, Inc</span
+            >
+          </div>
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3">
+              <a class="text-body-secondary" href="#" aria-label="Instagram">
+                <svg class="bi" width="24" height="24" aria-hidden="true">
+                    <use xlink:href="#instagram"></use></svg>
+                  </a>
+            </li>
+            <li class="ms-3">
+              <a class="text-body-secondary" href="#" aria-label="Facebook">
+                <svg class="bi" width="24" height="24">
+                  <use xlink:href="#facebook"></use></svg>
+              </a>
+            </li>
+          </ul>
+        </footer>
+      </div>
+    </main>
+
+<div id="kaki"></div>
+<script src="../assets/js/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+
+    $("#btnSimpan").click(function () {
+        let nama_supp = $("#nama_supp").val();
+        let email = $("#mail").val();
+        let alamat = $("#alamat").val();
+
+        // console.log(username)
+        $.ajax({
+            url: "http://localhost:3000/api/admin/suppliers/add",
+            method: "POST",
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+            contentType: "application/json",
+            data: JSON.stringify({
+                nama: nama_supp,
+                email: email,
+                alamat: alamat
+            }),
+            success: function (res) {
+              console.log(res)
+              alert(res.message)
+              window.location.href = "/admin/suppliers";
+            },
+            error: function (xhr) {
+                $("#error").text(xhr.responseJSON.message);
+            }
+        });
+    });
+  })
+
+
+  $("#header").load("../_partials/header.html");
+  $("#sisibar").load("../_partials/sidebar.html");
+  $("#kaki").load("../_partials/footer.html");
+</script>
+

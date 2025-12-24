@@ -26,7 +26,24 @@
 
         <!-- MAIN -->
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-  		    
+  		    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+          </div>
+          <div class="table-responsive small mt-3">
+            <table class="table table-bordered table-striped table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nama Item</th>
+                  <th scope="col">Stok</th>
+                  <th scope="col">Harga</th>
+                  <th scope="col">Sisa Stok</th>
+                </tr>
+              </thead>
+              <tbody id="content">
+              </tbody>
+            </table>
+          </div>
           <div class="container">
   		      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
   		        <div class="col-md-4 d-flex align-items-center">
@@ -72,6 +89,38 @@
             "Authorization": "Bearer " + localStorage.getItem("token")
         }
     })
+
+    function loadUsers() {
+        $.ajax({
+            url: "http://localhost:3000/api/admin/items-dashboard",
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+            success: function (res) {
+                let html = `
+                `;
+
+                res.forEach(u => {
+                    html += `
+                        <tr>
+                            <td>${u.ID}</td>
+                            <td>${u.nama_item}</td>
+                            <td>${u.stok}</td>
+                            <td>${u.harga}</td>
+                            <td></td>
+                        </tr>
+                    `;
+                });
+
+                $("#content").html(html);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        loadUsers();
+    });
     
     $("#header").load("../_partials/header.html");
     $("#sisibar").load("../_partials/sidebar.html");

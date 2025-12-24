@@ -81,3 +81,20 @@ func DeleteItem(c *fiber.Ctx) error {
 		"message": "Item deleted",
 	})
 }
+
+func GetSisaItems(c *fiber.Ctx) error {
+	var items []models.Item
+	config.DB.Find(&items)
+
+	// var result []ItemResponse
+
+	// type ItemResponse struct {
+
+	// 	Nama_item   string `json:"nama_item"`
+	// 	Stok      	int    `json:"stok"`
+	// 	Harga 		string `json:"harga"`
+	// 	SisaStok  	int    `json:"sisa_stok"`
+	// }
+
+	return c.JSON(items)
+}
