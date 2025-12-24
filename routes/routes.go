@@ -51,8 +51,12 @@ func SetupRoutes(app *fiber.App) {
 	app.Get("/admin/suppliers",func(c *fiber.Ctx) error {
 		return c.SendFile("./public/modul/suppliers/index.html")
 	});
+
 	app.Get("/admin/items",func(c *fiber.Ctx) error {
 		return c.SendFile("./public/modul/items/index.html")
+	});
+	app.Get("/admin/additems",func(c *fiber.Ctx) error {
+		return c.SendFile("./public/modul/items/tambah.html")
 	});
 
 
@@ -64,6 +68,11 @@ func SetupRoutes(app *fiber.App) {
 	admin.Get("/suppliers", controllers.GetSuppliers)
 	admin.Put("/suppliers/:id", controllers.UpdateSupplier)
 	admin.Delete("/suppliers/:id", controllers.DeleteSupplier)
+
+	admin.Get("/items", controllers.GetItems)
+	admin.Post("/item/add", controllers.AddItem)
+	admin.Put("/items/:id", controllers.UpdateItem)
+	admin.Delete("/items/:id", controllers.DeleteItem)
 
 	// purchase := api.Group("/purchase", middleware.JWTProtected, middleware.UserOnly)
 

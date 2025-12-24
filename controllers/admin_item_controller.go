@@ -14,6 +14,30 @@ func GetItems(c *fiber.Ctx) error {
 	return c.JSON(items)
 }
 
+func AddItem(c *fiber.Ctx) error {
+	
+	var items models.Item
+	
+	type UpdateRequest struct {
+		Nama_item  	string `json:"nama_item"`
+		Stok       	string `json:"stok"`
+		Harga 		string `json:"harga"`
+	}
+
+	var req UpdateRequest
+	c.BodyParser(&req)
+
+	items.Nama_item = req.Nama_item
+	items.Stok = req.Stok
+	items.Harga = req.Harga
+
+	config.DB.Create(&items)
+
+	return c.JSON(fiber.Map{
+		"message": "Data success added",
+	})
+}
+
 func UpdateItem(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var items models.Item
