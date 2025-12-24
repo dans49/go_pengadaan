@@ -53,5 +53,9 @@ func SetupRoutes(app *fiber.App) {
 	admin.Put("/users/:id", controllers.UpdateUser)
 	admin.Delete("/users/:id", controllers.DeleteUser)
 
+	admin.Get("/suppliers", controllers.GetSuppliers)
+	admin.Put("/suppliers/:id", controllers.UpdateSupplier)
+	admin.Delete("/suppliers/:id", controllers.DeleteSupplier)
+
 
 }
