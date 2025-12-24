@@ -17,10 +17,6 @@ func SetupRoutes(app *fiber.App) {
 		return c.SendFile("./public/login.html")
 	})
 
-	app.Get("/car2", func(c *fiber.Ctx) error {
-		return c.SendString("12")
-	})
-
 	api.Get("/hello", controllers.Hello)
 	api.Get("/nama", controllers.Nama)
 
